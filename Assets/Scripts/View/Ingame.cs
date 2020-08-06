@@ -12,6 +12,8 @@ public class Ingame : BaseScreen<Ingame>
     ObjectPool<Enemy> poolEnemy = new ObjectPool<Enemy>();
     public ObjectPool<DamageEffect> poolDamageEffect = new ObjectPool<DamageEffect>();
 
+    bool isSpawn = false;
+
     void Start()
     {
         //HideScreen();
@@ -41,17 +43,21 @@ public class Ingame : BaseScreen<Ingame>
             if (obj.isActive == true)
                 return;
         }
-        StartCoroutine(SpawnEnemys());
+        if (!isSpawn)
+            StartCoroutine(SpawnEnemys());
     }
 
     IEnumerator SpawnEnemys()
     {
+        isSpawn = true;
         int length = 0;
+
         while (length <= 5)
         {
             length++;
             poolEnemy.Spawn();
             yield return new WaitForSeconds(0.25f);
         }
+        isSpawn = false;
     }
 }
