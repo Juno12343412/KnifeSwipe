@@ -20,7 +20,7 @@ public class Stats : BaseScreen<Stats>
     [SerializeField] private Text coinPercent;
     [SerializeField] private Text coinPrice;
 
-    public override void ShowScreen()
+    public override sealed void ShowScreen()
     {
         ResetStatsView();
 
@@ -30,7 +30,7 @@ public class Stats : BaseScreen<Stats>
         base.ShowScreen();
     }
 
-    public override void HideScreen()
+    public override sealed void HideScreen()
     {
         Mainu.instance.mainButtons["Stats"].isCheck = false;
         Mainu.instance.mainButtons["Stats"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[0];

@@ -77,12 +77,12 @@ public class Mainu : BaseScreen<Mainu>
         }
     }
 
-    public override void ShowScreen()
+    public override sealed void ShowScreen()
     {
         base.ShowScreen();
     }
 
-    public override void HideScreen()
+    public override sealed void HideScreen()
     {
         base.HideScreen();
     }

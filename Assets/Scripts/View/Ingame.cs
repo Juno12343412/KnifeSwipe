@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pooling;
+using System;
 
 public class Ingame : BaseScreen<Ingame>
 {
@@ -23,20 +24,21 @@ public class Ingame : BaseScreen<Ingame>
 
     void Update()
     {
-        EnemySpawn();
+        if (!Boss.instance.isBoss)
+            EnemySpawn();
     }
 
-    public override void ShowScreen()
+    public override sealed void ShowScreen()
     {
         base.ShowScreen();
     }
 
-    public override void HideScreen()
+    public override sealed void HideScreen()
     {
         base.HideScreen();
     }
 
-    public void EnemySpawn()
+    void EnemySpawn()
     {
         foreach (var obj in poolEnemy)
         {
@@ -56,7 +58,7 @@ public class Ingame : BaseScreen<Ingame>
         {
             length++;
             poolEnemy.Spawn();
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.15f);
         }
         isSpawn = false;
     }

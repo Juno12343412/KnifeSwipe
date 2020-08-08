@@ -15,7 +15,7 @@ public class Upgrade : BaseScreen<Upgrade>
     [SerializeField] private Text bounce;
     [SerializeField] private Text totalDmg;
 
-    public override void ShowScreen()
+    public override sealed void ShowScreen()
     {
         ResetUpgradeView();
         Mainu.instance.mainButtons["Upgrade"].isCheck = true;
@@ -24,7 +24,7 @@ public class Upgrade : BaseScreen<Upgrade>
         base.ShowScreen();
     }
 
-    public override void HideScreen()
+    public override sealed void HideScreen()
     {
         Mainu.instance.mainButtons["Upgrade"].isCheck = false;
         Mainu.instance.mainButtons["Upgrade"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[0];
