@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class BossMonster : MonoBehaviour
 {
+    public static BossMonster instance;
     public float enemyHP, maxHP;
+
+    private void Awake()
+    {
+        instance = GetComponent<BossMonster>();
+    }
 
     void Update()
     {
-        if (enemyHP <= 0)
+        if (enemyHP <= 0 || !Boss.instance.isBoss)
         {
             Boss.instance.isBoss = false;
             PlayerStats.instance.stats.playerSpecialCoin += 10;
@@ -29,6 +35,8 @@ public class BossMonster : MonoBehaviour
 
             DamageEffect obj = Ingame.instance.poolDamageEffect.Spawn(transform.position);
             obj.GetComponent<DamageEffect>().getDamage = (int)damage;
+
+            Ingame.instance.poolHitEffect.Spawn(transform.position);
         }
     }
 }

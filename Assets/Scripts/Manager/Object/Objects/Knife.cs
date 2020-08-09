@@ -47,7 +47,7 @@ public class Knife : PoolingObject
 
     void Update()
     {
-        if (stats.bounce <= 0)                              
+        if (stats.bounce <= 0 || !Mainu.instance.mainButtons["Ingame"].isCheck)                              
             Release();
     }
 

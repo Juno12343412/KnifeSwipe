@@ -8,10 +8,11 @@ public class Ingame : BaseScreen<Ingame>
 {
     [Header("IN Game")]
     [Tooltip("몬스터들 오브젝트")] public GameObject[] objEnemys; 
-    [Tooltip("효과 오브젝트")] public GameObject objEffect;
+    [Tooltip("효과 오브젝트")] public GameObject[] objEffect;
 
     ObjectPool<Enemy> poolEnemy = new ObjectPool<Enemy>();
     public ObjectPool<DamageEffect> poolDamageEffect = new ObjectPool<DamageEffect>();
+    public ObjectPool<Effect> poolHitEffect = new ObjectPool<Effect>();
 
     bool isSpawn = false;
 
@@ -19,7 +20,8 @@ public class Ingame : BaseScreen<Ingame>
     {
         //HideScreen();
         poolEnemy.Init(objEnemys[0], 5);
-        poolDamageEffect.Init(objEffect, 5, Vector3.zero, Quaternion.identity, GameObject.Find("EffectCanvas").transform);
+        poolDamageEffect.Init(objEffect[0], 5, Vector3.zero, Quaternion.identity, GameObject.Find("EffectCanvas").transform);
+        poolHitEffect.Init(objEffect[1], 5, Vector3.zero, Quaternion.identity);
     }
 
     void Update()
@@ -30,11 +32,15 @@ public class Ingame : BaseScreen<Ingame>
 
     public override sealed void ShowScreen()
     {
+        Mainu.instance.mainButtons["Ingame"].isCheck = true;
+
         base.ShowScreen();
     }
 
     public override sealed void HideScreen()
     {
+        Mainu.instance.mainButtons["Ingame"].isCheck = false;
+
         base.HideScreen();
     }
 
@@ -54,12 +60,17 @@ public class Ingame : BaseScreen<Ingame>
         isSpawn = true;
         int length = 0;
 
-        while (length <= 5)
+        while (length <= 5 && Mainu.instance.mainButtons["Ingame"].isCheck)
         {
             length++;
             poolEnemy.Spawn();
             yield return new WaitForSeconds(0.15f);
         }
         isSpawn = false;
+    }
+
+    public void OnExit()
+    {
+        Boss.instance.isBoss = false;
     }
 }

@@ -33,6 +33,10 @@ public class Enemy : PoolingObject
             Release();
             PlayerStats.instance.stats.playerCoin += 500 * (int)(PlayerStats.instance.stats.coinPercentLv * 1.2f);
         }
+        else if (!Mainu.instance.mainButtons["Ingame"].isCheck)
+        {
+            Release();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -48,6 +52,8 @@ public class Enemy : PoolingObject
 
             DamageEffect obj = Ingame.instance.poolDamageEffect.Spawn(transform.position);
             obj.GetComponent<DamageEffect>().getDamage = (int)damage;
+
+            Ingame.instance.poolHitEffect.Spawn(transform.position);
         }
     }
 }

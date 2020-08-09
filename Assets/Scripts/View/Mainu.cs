@@ -25,7 +25,8 @@ public class Mainu : BaseScreen<Mainu>
         {
             { "Stats", new ButtonState(true, GameObject.Find("StatButton").GetComponent<Button>()) },
             { "Upgrade", new ButtonState(true, GameObject.Find("UpgradeButton").GetComponent<Button>()) },
-            { "Boss",  new ButtonState(true, GameObject.Find("BossButton").GetComponent<Button>()) }
+            { "Boss",  new ButtonState(true, GameObject.Find("BossButton").GetComponent<Button>()) },
+            { "Ingame",  new ButtonState(true, null) }
         };
     }
 

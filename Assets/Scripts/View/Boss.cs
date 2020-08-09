@@ -10,6 +10,10 @@ public class Boss : BaseScreen<Boss>
     [SerializeField] private GameObject[] bossObjs;
     [SerializeField] private GameObject[] backGrounds;
 
+    [SerializeField] private Image bossHpBar;
+    [SerializeField] private Text  bossName;
+    [SerializeField] private Text  bossHp;
+
     [HideInInspector] public bool isBoss = false;
     [HideInInspector] public int  BossDifficult = 0;
 
@@ -45,11 +49,17 @@ public class Boss : BaseScreen<Boss>
     {
         backGrounds[0].SetActive(false);
         backGrounds[1].SetActive(true);
+        backGrounds[2].SetActive(true);
+        Mainu.instance.HideScreen();
         while (isBoss)
         {
+            bossHpBar.fillAmount = (BossMonster.instance.enemyHP - 0) / (BossMonster.instance.maxHP - 0);
+            bossHp.text = ((int)BossMonster.instance.enemyHP).ToString();
             yield return null;
         }
         backGrounds[0].SetActive(true);
         backGrounds[1].SetActive(false);
+        backGrounds[2].SetActive(false);
+        Mainu.instance.ShowScreen();
     }
 }
