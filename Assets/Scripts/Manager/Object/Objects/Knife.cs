@@ -22,7 +22,7 @@ public class Knife : PoolingObject
     private GameObject player;
 
     private Vector3 vecMove;
-    private float moveSpeed = 10f;
+    private float moveSpeed = 20f;
 
     public override sealed void Init()
     {
