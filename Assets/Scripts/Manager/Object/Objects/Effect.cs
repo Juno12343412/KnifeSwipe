@@ -9,7 +9,7 @@ public class Effect : PoolingObject
 
     public override void Init()
     {
-        Invoke("Release", 0.5f);
+        Invoke("Release", 0.25f);
         base.Init();
     }
 

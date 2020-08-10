@@ -67,7 +67,7 @@ public class Knife : PoolingObject
         {
             if (target.activeSelf)
             {
-                transform.position = Vector3.Lerp(transform.position, target.transform.position, 5f * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, target.transform.position, 10f * Time.deltaTime);
                 transform.rotation = MathK.LookAngle(target.transform.position - transform.position);
             }
             else
