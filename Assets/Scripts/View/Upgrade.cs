@@ -18,17 +18,11 @@ public class Upgrade : BaseScreen<Upgrade>
     public override sealed void ShowScreen()
     {
         ResetUpgradeView();
-        Mainu.instance.mainButtons["Upgrade"].isCheck = true;
-        Mainu.instance.mainButtons["Upgrade"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[1];
-
         base.ShowScreen();
     }
 
     public override sealed void HideScreen()
     {
-        Mainu.instance.mainButtons["Upgrade"].isCheck = false;
-        Mainu.instance.mainButtons["Upgrade"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[0];
-
         base.HideScreen();
     }
 

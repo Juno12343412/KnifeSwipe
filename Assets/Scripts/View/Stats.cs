@@ -23,18 +23,11 @@ public class Stats : BaseScreen<Stats>
     public override sealed void ShowScreen()
     {
         ResetStatsView();
-
-        Mainu.instance.mainButtons["Stats"].isCheck = true;
-        Mainu.instance.mainButtons["Stats"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[1];
-
         base.ShowScreen();
     }
 
     public override sealed void HideScreen()
     {
-        Mainu.instance.mainButtons["Stats"].isCheck = false;
-        Mainu.instance.mainButtons["Stats"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[0];
-
         base.HideScreen();
     }
 

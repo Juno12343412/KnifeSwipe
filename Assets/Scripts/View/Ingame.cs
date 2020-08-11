@@ -32,15 +32,11 @@ public class Ingame : BaseScreen<Ingame>
 
     public override sealed void ShowScreen()
     {
-        Mainu.instance.mainButtons["Ingame"].isCheck = true;
-
         base.ShowScreen();
     }
 
     public override sealed void HideScreen()
     {
-        Mainu.instance.mainButtons["Ingame"].isCheck = false;
-
         base.HideScreen();
     }
 
@@ -60,7 +56,7 @@ public class Ingame : BaseScreen<Ingame>
         isSpawn = true;
         int length = 0;
 
-        while (length <= 5 && Mainu.instance.mainButtons["Ingame"].isCheck)
+        while (length <= 5 && SwipeManager.instance.mainButtons[ViewState.Ingame].isCheck)
         {
             length++;
             poolEnemy.Spawn();

@@ -33,7 +33,7 @@ public class Enemy : PoolingObject
             Release();
             PlayerStats.instance.stats.playerCoin += 500 * (int)(PlayerStats.instance.stats.coinPercentLv * 1.2f);
         }
-        else if (!Mainu.instance.mainButtons["Ingame"].isCheck)
+        else if (!SwipeManager.instance.mainButtons[ViewState.Ingame].isCheck)
         {
             Release();
         }

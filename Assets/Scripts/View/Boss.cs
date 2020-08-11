@@ -19,17 +19,11 @@ public class Boss : BaseScreen<Boss>
 
     public override sealed void ShowScreen()
     {
-        Mainu.instance.mainButtons["Boss"].isCheck = true;
-        Mainu.instance.mainButtons["Boss"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[1];
-
         base.ShowScreen();
     }
 
     public override sealed void HideScreen()
     {
-        Mainu.instance.mainButtons["Boss"].isCheck = false;
-        Mainu.instance.mainButtons["Boss"].myButton.GetComponentInChildren<Image>().sprite = Mainu.instance.checkImages[0];
-
         base.HideScreen();
     }
 
@@ -38,11 +32,9 @@ public class Boss : BaseScreen<Boss>
         isBoss = true;
 
         Instantiate(bossObjs[0], GameObject.Find("BossSpawner").transform);
-        Ingame.instance.ShowScreen();
-        Stats.instance.HideScreen();
-        Upgrade.instance.HideScreen();
-        HideScreen();
         StartCoroutine(checkBoss());
+
+        SwipeManager.instance.ChanageView(ViewState.Ingame, 0f);
     }
 
     IEnumerator checkBoss()
@@ -50,7 +42,8 @@ public class Boss : BaseScreen<Boss>
         backGrounds[0].SetActive(false);
         backGrounds[1].SetActive(true);
         backGrounds[2].SetActive(true);
-        Mainu.instance.HideScreen();
+        backGrounds[3].SetActive(false);
+        backGrounds[4].SetActive(false);
         while (isBoss)
         {
             bossHpBar.fillAmount = (BossMonster.instance.enemyHP - 0) / (BossMonster.instance.maxHP - 0);
@@ -60,6 +53,7 @@ public class Boss : BaseScreen<Boss>
         backGrounds[0].SetActive(true);
         backGrounds[1].SetActive(false);
         backGrounds[2].SetActive(false);
-        Mainu.instance.ShowScreen();
+        backGrounds[3].SetActive(true);
+        backGrounds[4].SetActive(true);
     }
 }
