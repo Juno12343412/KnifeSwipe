@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Good;
 
 public class Stats : BaseScreen<Stats>
 {
@@ -20,6 +21,11 @@ public class Stats : BaseScreen<Stats>
     [SerializeField] private Text coinPercent;
     [SerializeField] private Text coinPrice;
 
+    private void Start()
+    {
+        ResetStatsView();
+    }
+
     public override sealed void ShowScreen()
     {
         ResetStatsView();
@@ -33,22 +39,19 @@ public class Stats : BaseScreen<Stats>
 
     public void OnCritPercent()
     {
-        if (PlayerStats.instance.stats.critPercentLv * 100 * 1.2f <= PlayerStats.instance.stats.playerCoin)
+        if (ETC.GetCoin(PlayerStats.instance.stats.critPercentLv) <= PlayerStats.instance.stats.playerCoin)
         {
-            if (PlayerStats.instance.stats.critPercentLv < 20)
-            {
-                PlayerStats.instance.stats.playerCoin -= (int)(PlayerStats.instance.stats.critPercentLv * 100 * 1.2f);
-                PlayerStats.instance.stats.critPercentLv++;
-                ResetStatsView();
-            }
+            PlayerStats.instance.stats.playerCoin -= (int)ETC.GetCoin(PlayerStats.instance.stats.critPercentLv);
+            PlayerStats.instance.stats.critPercentLv++;
+            ResetStatsView();
         }
     }
 
     public void OnCritDamage()
     {
-        if (PlayerStats.instance.stats.critDamageLv * 100 * 1.2f <= PlayerStats.instance.stats.playerCoin)
+        if (ETC.GetCoin(PlayerStats.instance.stats.critDamageLv) <= PlayerStats.instance.stats.playerCoin)
         {
-            PlayerStats.instance.stats.playerCoin -= (int)(PlayerStats.instance.stats.critDamageLv * 100 * 1.2f);
+            PlayerStats.instance.stats.playerCoin -= (int)ETC.GetCoin(PlayerStats.instance.stats.critDamageLv);
             PlayerStats.instance.stats.critDamageLv++;
             ResetStatsView();
         }
@@ -56,9 +59,9 @@ public class Stats : BaseScreen<Stats>
 
     public void OnCoinPercent()
     {
-        if (PlayerStats.instance.stats.coinPercentLv * 100 * 1.2f <= PlayerStats.instance.stats.playerCoin)
+        if (ETC.GetCoin(PlayerStats.instance.stats.coinPercentLv) <= PlayerStats.instance.stats.playerCoin)
         {
-            PlayerStats.instance.stats.playerCoin -= (int)(PlayerStats.instance.stats.coinPercentLv * 100 * 1.2f);
+            PlayerStats.instance.stats.playerCoin -= (int)ETC.GetCoin(PlayerStats.instance.stats.coinPercentLv);
             PlayerStats.instance.stats.coinPercentLv++;
             ResetStatsView();
         }
@@ -70,29 +73,20 @@ public class Stats : BaseScreen<Stats>
 
         crit1Lv.text = PlayerStats.instance.stats.critPercentLv.ToString();
         crit1NextLv.text = (PlayerStats.instance.stats.critPercentLv + 1).ToString();
-        crit1Percent.text = (PlayerStats.instance.stats.critPercentLv * 5).ToString() + "%";
-        price = (int)(PlayerStats.instance.stats.critPercentLv * 100 * 1.2f); Debug.Log(price);
-        if (price < 1000)
-            crit1Price.text = price.ToString();
-        else if (price >= 1000)
-            crit1Price.text = (price / 1000).ToString() + ".A";
+        crit1Percent.text = ETC.GetCritHit(PlayerStats.instance.stats.critPercentLv).ToString() + "%";
+        price = (int)ETC.GetCoin(PlayerStats.instance.stats.critPercentLv); 
+        crit1Price = ETC.Calculation(crit1Price, price);
 
         crit2Lv.text = PlayerStats.instance.stats.critDamageLv.ToString();
         crit2NextLv.text = (PlayerStats.instance.stats.critDamageLv + 1).ToString();
-        crit2Damage.text = (PlayerStats.instance.stats.critDamageLv * 20f).ToString() + "%";
-        price = (int)(PlayerStats.instance.stats.critDamageLv * 100 * 1.2f);
-        if (price < 1000)
-            crit2Price.text = price.ToString();
-        else if (price >= 1000)
-            crit2Price.text = (price / 1000).ToString() + ".A";
+        crit2Damage.text = ETC.GetCritDmg(PlayerStats.instance.stats.critDamageLv).ToString() + "%";
+        price = (int)ETC.GetCoin(PlayerStats.instance.stats.critDamageLv);
+        crit2Price = ETC.Calculation(crit2Price, price);
 
         coinLv.text = PlayerStats.instance.stats.coinPercentLv.ToString();
         coinNextLv.text = (PlayerStats.instance.stats.coinPercentLv + 1).ToString();
-        coinPercent.text = ((int)(PlayerStats.instance.stats.coinPercentLv * 1.2f)).ToString() + "%";
-        price = (int)(PlayerStats.instance.stats.coinPercentLv * 100 * 1.2f);
-        if (price < 1000)
-            coinPrice.text = price.ToString();
-        else if (price >= 1000)
-            coinPrice.text = (price / 1000).ToString() + ".A";
+        coinPercent.text = PlayerStats.instance.stats.coinPercentLv.ToString() + "%";
+        price = (int)ETC.GetCoin(PlayerStats.instance.stats.coinPercentLv);
+        coinPrice = ETC.Calculation(coinPrice, price);
     }
 }

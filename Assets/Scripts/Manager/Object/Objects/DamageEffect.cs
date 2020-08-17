@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pooling;
 using UnityEngine.UI;
+using Good;
 
 public class DamageEffect : PoolingObject
 {
-    [HideInInspector] public int getDamage;
+    [HideInInspector] public int getDamage = 0;
+    [HideInInspector] public bool isCrit = false;
     public override string objectName => "Effect";
     public Text damageText;
 
@@ -14,13 +16,17 @@ public class DamageEffect : PoolingObject
     {
         transform.position += Vector3.up * Time.deltaTime;
         damageText.color -= new Color(0, 0, 0, Time.deltaTime);
-        damageText.text = getDamage.ToString();
+        damageText = ETC.Calculation(damageText, getDamage);
+        if (!isCrit)
+            damageText.fontSize = 45;
+        else
+            damageText.fontSize = 90;
     }
 
     public override void Init()
     {
+        damageText.color = new Color(255, 255, 255, 1);
         Invoke("Release", 2.5f);
-        damageText.color = new Color(255, 241, 85, 1f);
         base.Init();
     }
 

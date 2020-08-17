@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using KnifeSwipe;
+using Good;
 
 public class Upgrade : BaseScreen<Upgrade>
 {
+    [SerializeField] private Image knifeImg;
     [SerializeField] private Text upgradeCoinPrice, upgradeSpecialPrice;
     [SerializeField] private Text potentialPrice;
     [SerializeField] private Text knifeLv;
@@ -14,6 +17,11 @@ public class Upgrade : BaseScreen<Upgrade>
     [SerializeField] private Text attackCount;
     [SerializeField] private Text bounce;
     [SerializeField] private Text totalDmg;
+
+    private void Start()
+    {
+        ResetUpgradeView();
+    }
 
     public override sealed void ShowScreen()
     {
@@ -28,25 +36,25 @@ public class Upgrade : BaseScreen<Upgrade>
 
     public void OnUpgrade()
     {
-        if (
-           PlayerStats.instance.stats.knifeLv * 1000 * 1.2f <= PlayerStats.instance.stats.playerCoin &&
-           PlayerStats.instance.stats.knifeLv * 10 <= PlayerStats.instance.stats.playerSpecialCoin
-           )
+        if (ETC.GetCoin(PlayerStats.instance.stats.knifeLv) <= PlayerStats.instance.stats.playerCoin &&
+            ETC.GetCoin(PlayerStats.instance.stats.knifeLv / 2f) <= PlayerStats.instance.stats.playerSpecialCoin)
         {
-            PlayerStats.instance.stats.playerCoin -= (int)(PlayerStats.instance.stats.knifeLv * 1000 * 1.2f);
-            PlayerStats.instance.stats.playerSpecialCoin -= (int)(PlayerStats.instance.stats.knifeLv * 10);
+            PlayerStats.instance.stats.playerCoin -= (int)(ETC.GetCoin(PlayerStats.instance.stats.knifeLv));
+            PlayerStats.instance.stats.playerSpecialCoin -= (int)(ETC.GetCoin(PlayerStats.instance.stats.knifeLv / 2f));
             PlayerStats.instance.stats.knifeLv++;
-            PlayerStats.instance.stats.knifeDamage *= 2f;
+            PlayerStats.instance.stats.knifeDamage = ETC.GetAttack(PlayerStats.instance.stats.knifeLv);
             PlayerStats.instance.stats.knifeMaxBounce++;
             ResetUpgradeView();
         }
+        Controller.instance.ChanageKnife();
+        knifeImg.sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
     }
 
     public void OnPotential()
     {
-        if (PlayerStats.instance.stats.knifeLv * 500 * 1.2f <= PlayerStats.instance.stats.playerSpecialCoin)
+        if (ETC.GetCoin(PlayerStats.instance.stats.knifeLv * 1.2f) <= PlayerStats.instance.stats.playerSpecialCoin)
         {
-            PlayerStats.instance.stats.playerSpecialCoin -= (int)(PlayerStats.instance.stats.knifeLv * 500 * 1.2f);
+            PlayerStats.instance.stats.playerSpecialCoin -= (int)ETC.GetCoin(PlayerStats.instance.stats.knifeLv * 1.2f);
             // To Do...
             ResetUpgradeView();
         }
@@ -56,35 +64,25 @@ public class Upgrade : BaseScreen<Upgrade>
     {
         int price = 0;
 
-        price = (int)(PlayerStats.instance.stats.knifeLv * 1000 * 1.2f); Debug.Log(price);
-        if (price < 1000)
-            upgradeCoinPrice.text = price.ToString();
-        else if (price >= 1000)
-            upgradeCoinPrice.text = (price / 1000).ToString() + ".A";
+        price = (int)ETC.GetCoin(PlayerStats.instance.stats.knifeLv); 
+        upgradeCoinPrice = ETC.Calculation(upgradeCoinPrice, price);
 
-        price = PlayerStats.instance.stats.knifeLv * 10; Debug.Log(price);
-        if (price < 1000)
-            upgradeSpecialPrice.text = price.ToString();
-        else if (price >= 1000)
-            upgradeSpecialPrice.text = (price / 1000).ToString() + ".A";
+        price = (int)ETC.GetCoin(PlayerStats.instance.stats.knifeLv / 2f); 
+        upgradeSpecialPrice = ETC.Calculation(upgradeSpecialPrice, price);
 
-        price = (int)(PlayerStats.instance.stats.knifeLv * 500 * 1.2f); Debug.Log(price);
-        if (price < 1000)
-            potentialPrice.text = price.ToString();
-        else if (price >= 1000)
-            potentialPrice.text = (price / 1000).ToString() + ".A";
+        price = (int)ETC.GetCoin(PlayerStats.instance.stats.knifeLv * 1.2f); 
+        potentialPrice = ETC.Calculation(potentialPrice, price);
+
 
         knifeLv.text = PlayerStats.instance.stats.knifeLv.ToString() + "+";
-        knifeDmg.text = PlayerStats.instance.stats.knifeDamage.ToString();
-        critPercent.text = (PlayerStats.instance.stats.critPercentLv * 5).ToString() + "%";
-        critDmg.text = (PlayerStats.instance.stats.critDamageLv * 20f).ToString() + "%";
+        knifeDmg = ETC.Calculation(knifeDmg, (int)PlayerStats.instance.stats.knifeDamage);
+        critPercent.text = ETC.GetCritHit(PlayerStats.instance.stats.critPercentLv).ToString() + "%";
+        critDmg.text = (ETC.GetCritDmg(PlayerStats.instance.stats.critDamageLv)).ToString() + "%";
         attackCount.text = PlayerStats.instance.stats.knifeAttackCount.ToString() + "번";
         bounce.text = PlayerStats.instance.stats.knifeMaxBounce.ToString() + "번";
 
-        price = (int)(PlayerStats.instance.stats.knifeAttackCount * (PlayerStats.instance.stats.knifeDamage * (PlayerStats.instance.stats.critDamageLv * 20f)));
-        if (price < 1000)
-            totalDmg.text = price.ToString();
-        else if (price >= 1000)
-            totalDmg.text = (price / 1000).ToString() + ".A";
+        price = (int)((100f + PlayerStats.instance.stats.knifeDamage) * (ETC.GetCritDmg(PlayerStats.instance.stats.critDamageLv / 100f) * 100f / 100f));
+        totalDmg = ETC.Calculation(totalDmg, price);
+
     }
 }

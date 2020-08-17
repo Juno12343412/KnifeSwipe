@@ -84,10 +84,11 @@ public class Knife : PoolingObject
             if (target != null)
                 stats.bounce--;
             else
-                return;
+                target = null;
             return;
         }
-        else if (other.transform.tag == "Wall")
+       
+        if (other.transform.tag == "Wall")
         {
             Vector2 incomingVec = Vector2.zero;
             if (target == null)

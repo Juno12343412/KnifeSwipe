@@ -60,8 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9465888, b: 0.3254717, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -78,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 999999
+  m_Text: 0
 --- !u!114 &8574642582147725376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,4 +108,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getDamage: 0
+  isCrit: 0
   damageText: {fileID: 8574642582147725383}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Good;
 
 public class BossMonster : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class BossMonster : MonoBehaviour
         if (enemyHP <= 0 || !Boss.instance.isBoss)
         {
             Boss.instance.isBoss = false;
-            PlayerStats.instance.stats.playerSpecialCoin += 10;
+            PlayerStats.instance.stats.playerSpecialCoin += 1000;
             Destroy(gameObject);
         }
     }
@@ -27,14 +28,20 @@ public class BossMonster : MonoBehaviour
         if (other.transform.tag == "Knife")
         {
             float damage = 0f;
-            if (Random.Range(1, 100) >= PlayerStats.instance.stats.critPercentLv * 5f || PlayerStats.instance.stats.critPercentLv >= 100f)
-                damage = PlayerStats.instance.stats.knifeDamage * (PlayerStats.instance.stats.critDamageLv * 20f);
-            else
-                damage = PlayerStats.instance.stats.knifeDamage * PlayerStats.instance.stats.critDamageLv / Random.Range(1, 5f);
-            enemyHP -= damage;
-
             DamageEffect obj = Ingame.instance.poolDamageEffect.Spawn(transform.position);
+            if (Random.Range(1, 100) <= ETC.GetCritHit(PlayerStats.instance.stats.critPercentLv))
+            {
+                print("Crit");
+                obj.GetComponent<DamageEffect>().isCrit = true;
+                damage = (100f + PlayerStats.instance.stats.knifeDamage) * (ETC.GetCritDmg(PlayerStats.instance.stats.critDamageLv / 100f) * 10f / 100f);
+            }
+            else
+            {
+                obj.GetComponent<DamageEffect>().isCrit = false;
+                damage = (100f + PlayerStats.instance.stats.knifeDamage) * 10f / 100f;
+            }
             obj.GetComponent<DamageEffect>().getDamage = (int)damage;
+            enemyHP -= damage;
 
             Ingame.instance.poolHitEffect.Spawn(transform.position);
         }

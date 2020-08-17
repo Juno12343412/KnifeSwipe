@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
+    public Sprite[] knifeImgs;
 
       [Serializable]
     public class Player
