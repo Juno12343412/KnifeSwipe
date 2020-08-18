@@ -88,5 +88,7 @@ public class Stats : BaseScreen<Stats>
         coinPercent.text = PlayerStats.instance.stats.coinPercentLv.ToString() + "%";
         price = (int)ETC.GetCoin(PlayerStats.instance.stats.coinPercentLv);
         coinPrice = ETC.Calculation(coinPrice, price);
+
+        GameLogic.instance.Save();
     }
 }

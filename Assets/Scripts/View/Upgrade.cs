@@ -46,8 +46,6 @@ public class Upgrade : BaseScreen<Upgrade>
             PlayerStats.instance.stats.knifeMaxBounce++;
             ResetUpgradeView();
         }
-        Controller.instance.ChanageKnife();
-        knifeImg.sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
     }
 
     public void OnPotential()
@@ -84,5 +82,9 @@ public class Upgrade : BaseScreen<Upgrade>
         price = (int)((100f + PlayerStats.instance.stats.knifeDamage) * (ETC.GetCritDmg(PlayerStats.instance.stats.critDamageLv / 100f) * 100f / 100f));
         totalDmg = ETC.Calculation(totalDmg, price);
 
+        Controller.instance.ChanageKnife();
+        knifeImg.sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
+
+        GameLogic.instance.Save();
     }
 }

@@ -20,6 +20,7 @@ namespace KnifeSwipe
 
         void Start()
         {
+            objKnife.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
             poolKnife.Init(objKnife, 10);
             ChanageKnife();
         }
