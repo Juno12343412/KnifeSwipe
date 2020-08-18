@@ -32,6 +32,8 @@ public class PlayerStats : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        instance = GetComponent<PlayerStats>();    
+        instance = GetComponent<PlayerStats>();
+
+        stats.knifeMaxBounce = stats.knifeBounce;
     }
 }

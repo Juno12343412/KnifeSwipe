@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -222,16 +223,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187d8322d319c2a489d8967f1fbd827a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knifeImgs:
+  - {fileID: 21300000, guid: 15713add0e26b1947a38c1137eba65a7, type: 3}
+  - {fileID: 21300000, guid: e4224b5e02f4f2b4496cfa0cea4fea7c, type: 3}
+  - {fileID: 21300000, guid: d342d79ebc8ec0b419de7d5e7b51acac, type: 3}
+  - {fileID: 21300000, guid: ba55426e38ae567479e89f7df23cca54, type: 3}
+  - {fileID: 21300000, guid: 576f29954f879df40a604ab1df5820e7, type: 3}
+  - {fileID: 21300000, guid: 747cf70b295df2549810eb5ca3eba1da, type: 3}
+  - {fileID: 21300000, guid: 5af1b03db01939945a8205394195f96f, type: 3}
+  - {fileID: 21300000, guid: 7027d3ed877311b469f364a4792cc8f3, type: 3}
+  - {fileID: 21300000, guid: c86a1cfb944d03546bc257c6e1ae7127, type: 3}
   stats:
-    playerCoin: 50000
+    playerCoin: 5000
     maxCoin: 99999
-    playerSpecialCoin: 50000
+    playerSpecialCoin: 54340
     maxSpecialCoin: 99999
     knifeLv: 1
     knifeBounce: 4
     knifeMaxBounce: 4
     knifeAttackCount: 1
-    knifeDamage: 5
+    knifeDamage: 100
     critPercentLv: 1
     critDamageLv: 1
     coinPercentLv: 1
@@ -255,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527435579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14765643, y: 0.21686596, z: -10.746094}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -383,6 +394,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1966803940}
     m_Modifications:
+    - target: {fileID: 7228156533598951364, guid: 6502dd043f2448745b4a17e3dba03a93,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 40521deace0ef6f449585f0160c547fa,
+        type: 3}
+    - target: {fileID: 7228156533598951365, guid: 6502dd043f2448745b4a17e3dba03a93,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228156533598951365, guid: 6502dd043f2448745b4a17e3dba03a93,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228156533598951365, guid: 6502dd043f2448745b4a17e3dba03a93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7228156534086475304, guid: 6502dd043f2448745b4a17e3dba03a93,
         type: 3}
       propertyPath: m_MatchWidthOrHeight
