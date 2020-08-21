@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: ddd69ac916fdcba4f8786851d0acbc58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,10 +120,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHP: 500
   maxHP: 500
+  explosionEffect: {fileID: 4432060622851186582, guid: 95f554ef0a75cba49a28d8a13d181c3d,
+    type: 3}
+  blackHoleEffect: {fileID: 3206867372405015650, guid: 5dfbcbeeeaed6714f9b09c5ec0a82954,
+    type: 3}
   sprites:
-  - {fileID: 21300000, guid: ddd69ac916fdcba4f8786851d0acbc58, type: 3}
-  - {fileID: 21300000, guid: 61992e5e4f353464cb6fc1f1b2265bc0, type: 3}
-  - {fileID: 21300000, guid: 027355079742a9747b513c0ea725e027, type: 3}
+  - {fileID: 21300000, guid: cf515ec3ab833324083cd5a3a9efe067, type: 3}
+  - {fileID: 21300000, guid: 10f38d44b29f7074da3e3d5146ea5df5, type: 3}
+  - {fileID: 21300000, guid: 0aab0735d016bb048ab58a1f6dd81100, type: 3}
+  - {fileID: 21300000, guid: 82e3dafbf2b3da54e9a7c671b723d582, type: 3}
+  - {fileID: 21300000, guid: 7fbe49c19f11a79478dd9d72bab03f21, type: 3}
+  - {fileID: 21300000, guid: 92c3d66c3a6c94f488e0296781b940a1, type: 3}
+  - {fileID: 21300000, guid: 11d00780ac5032f4fb969ac272b545a6, type: 3}
+  - {fileID: 21300000, guid: 4514413bfbb6f404a8d21810de80c1a8, type: 3}
+  - {fileID: 21300000, guid: 906f2e2f9d5e9304bb84132901fd4050, type: 3}
+  - {fileID: 21300000, guid: 1758deef0986f49439c64180df11ea51, type: 3}
+  - {fileID: 21300000, guid: 9cc39cbd331c859438fb3b910c33f4c9, type: 3}
+  - {fileID: 21300000, guid: c7e252502d4b08e47b88324dc0341ea4, type: 3}
+  isFire: 0
 --- !u!58 &2318311835214326406
 CircleCollider2D:
   m_ObjectHideFlags: 0

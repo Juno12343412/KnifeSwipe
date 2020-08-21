@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Pooling;
+using Good;
 
 public class GameLogic : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class GameLogic : MonoBehaviour
     void Awake()
     {
         instance = GetComponent<GameLogic>();
-
         Load();
     }
 
@@ -31,10 +31,18 @@ public class GameLogic : MonoBehaviour
         DataController.Instance.gameData.knifeBounce = PlayerStats.instance.stats.knifeBounce;
         DataController.Instance.gameData.knifeAttackCount = PlayerStats.instance.stats.knifeAttackCount;
         DataController.Instance.gameData.knifeDamage = PlayerStats.instance.stats.knifeDamage;
+        DataController.Instance.gameData.moreDamage = PlayerStats.instance.stats.moreDamage;
         DataController.Instance.gameData.critPercentLv = PlayerStats.instance.stats.critPercentLv;
+        DataController.Instance.gameData.critPercent = PlayerStats.instance.stats.critPercent;
         DataController.Instance.gameData.critDamageLv = PlayerStats.instance.stats.critDamageLv;
+        DataController.Instance.gameData.critDamage = PlayerStats.instance.stats.critDamage;
         DataController.Instance.gameData.coinPercentLv = PlayerStats.instance.stats.coinPercentLv;
-
+        DataController.Instance.gameData.coinPercent = PlayerStats.instance.stats.coinPercent;
+        DataController.Instance.gameData.curStage = PlayerStats.instance.stats.curStage;
+        if (PlayerStats.instance.stats.potentials != null)
+        {
+            DataController.Instance.gameData.potentials = PlayerStats.instance.stats.potentials;
+        }
         DataController.Instance.SaveGameData();
     }
 
@@ -50,8 +58,17 @@ public class GameLogic : MonoBehaviour
         PlayerStats.instance.stats.knifeBounce = DataController.Instance.gameData.knifeBounce;
         PlayerStats.instance.stats.knifeAttackCount = DataController.Instance.gameData.knifeAttackCount;
         PlayerStats.instance.stats.knifeDamage = DataController.Instance.gameData.knifeDamage;
+        PlayerStats.instance.stats.moreDamage = DataController.Instance.gameData.moreDamage;
         PlayerStats.instance.stats.critPercentLv = DataController.Instance.gameData.critPercentLv;
+        PlayerStats.instance.stats.critPercent = DataController.Instance.gameData.critPercent;
         PlayerStats.instance.stats.critDamageLv = DataController.Instance.gameData.critDamageLv;
+        PlayerStats.instance.stats.critDamage = DataController.Instance.gameData.critDamage;
         PlayerStats.instance.stats.coinPercentLv = DataController.Instance.gameData.coinPercentLv;
+        PlayerStats.instance.stats.coinPercent = DataController.Instance.gameData.coinPercent;
+        PlayerStats.instance.stats.curStage = DataController.Instance.gameData.curStage;
+        if (DataController.Instance.gameData.potentials != null)
+        {
+            PlayerStats.instance.stats.potentials = DataController.Instance.gameData.potentials;
+        }
     }
 }

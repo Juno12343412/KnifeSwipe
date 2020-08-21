@@ -20,7 +20,7 @@ namespace KnifeSwipe
 
         void Start()
         {
-            objKnife.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
+            objKnife.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv / 10];
             poolKnife.Init(objKnife, 10);
             ChanageKnife();
         }
@@ -42,10 +42,15 @@ namespace KnifeSwipe
         {
             foreach (var obj in poolKnife)
             {
-                if (obj != null)
+                if (PlayerStats.instance.stats.knifeLv / 10 >= PlayerStats.instance.knifeImgs.Length)
                 {
-                    obj.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
-                    objKnife.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv - 1];
+                    obj.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.knifeImgs.Length - 1];
+                    objKnife.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.knifeImgs.Length - 1];
+                }
+                else
+                {
+                    obj.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv / 10];
+                    objKnife.GetComponent<SpriteRenderer>().sprite = PlayerStats.instance.knifeImgs[PlayerStats.instance.stats.knifeLv / 10];
                 }
             }
         }

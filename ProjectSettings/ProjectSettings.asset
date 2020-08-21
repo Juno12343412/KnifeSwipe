@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: SeoulDigitechHighSchool
   productName: KnifeSwipe
   defaultCursor: {fileID: 2800000, guid: 394bac031a2a1e943b2a14e7f23c5b4e, type: 3}
   cursorHotspot: {x: 0, y: 0}
@@ -111,10 +111,13 @@ PlayerSettings:
   switchNVNShaderPoolsGranularity: 33554432
   switchNVNDefaultPoolsGranularity: 16777216
   switchNVNOtherPoolsGranularity: 16777216
+  switchNVNMaxPublicTextureIDCount: 0
+  switchNVNMaxPublicSamplerIDCount: 0
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
   vulkanEnableSetSRGBWrite: 0
+  vulkanEnableLateAcquireNextImage: 0
   m_SupportedAspectRatios:
     4:3: 1
     5:4: 1
@@ -265,7 +268,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: eaa98665d31075a4dabb1051d4662b83, type: 3}
+      m_Icon: {fileID: 2800000, guid: f342182f861fc4244b26bdb0015eb119, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

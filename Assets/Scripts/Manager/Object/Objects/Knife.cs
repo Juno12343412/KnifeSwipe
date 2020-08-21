@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pooling;
 using Good;
+using Manager.Sound;
 
 public class Knife : PoolingObject
 {
@@ -12,7 +13,7 @@ public class Knife : PoolingObject
        [Serializable]
     public struct Stats
     {
-        public float knifeDamage;
+        public double knifeDamage;
         public float maxBounce;
         public float bounce;
         public float lifeTime;
@@ -26,6 +27,8 @@ public class Knife : PoolingObject
 
     public override sealed void Init()
     {
+        SoundManager.instance.PlaySound("칼 던지는 효과음");
+
         stats.maxBounce = PlayerStats.instance.stats.knifeMaxBounce;
         stats.knifeDamage = PlayerStats.instance.stats.knifeDamage;
 
