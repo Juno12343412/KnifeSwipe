@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
+using Manager.Sound;
+
 public enum ViewState
 {
     Ingame, Stats,
@@ -56,45 +58,56 @@ public class SwipeManager : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isMove || Boss.instance.isBoss)
-            return;
+        //if (isMove || Boss.instance.isBoss)
+        //    return;
 
-        // Stats , Upgrade , Ingame , Boss
-        oldView = curView;
-        Vector2 p = eventData.position - eventData.pressPosition;
+        //// Stats , Upgrade , Ingame , Boss
+        //oldView = curView;
+        //Vector2 p = eventData.position - eventData.pressPosition;
 
-        if (Mathf.Abs(p.x) > Mathf.Abs(p.y))
-        {
-            if (Mathf.Sign(p.x) == Vector2.left.x)
-            {
-                print("Left");
-                if (curView != ViewState.Boss)
-                {
-                    curView += 1;
-                    curCamPos += 5.6f;
-                }
-            }
-            else if (Mathf.Sign(p.x) == Vector2.right.x)
-            {
-                print("Right");
-                if (curView != ViewState.Ingame)
-                {
-                    curView -= 1;
-                    curCamPos -= 5.6f;
-                }
-            }
-        }
+        //if (Mathf.Abs(p.x) > Mathf.Abs(p.y))
+        //{
+        //    if (Mathf.Sign(p.x) == Vector2.left.x)
+        //    {
+        //        print("Left");
+        //        if (curView != ViewState.Boss)
+        //        {
+        //            curView += 1;
+        //            curCamPos += 5.6f;
+        //        }
+        //    }
+        //    else if (Mathf.Sign(p.x) == Vector2.right.x)
+        //    {
+        //        print("Right");
+        //        if (curView != ViewState.Ingame)
+        //        {
+        //            curView -= 1;
+        //            curCamPos -= 5.6f;
+        //        }
+        //    }
+        //}
 
-        mainButtons[oldView].isCheck = false;
-        mainButtons[curView].isCheck = true;
-        mainButtons[oldView].myButton.image.sprite = checkImages[0];
-        mainButtons[curView].myButton.image.sprite = checkImages[1];
+        //mainButtons[ViewState.Ingame].isCheck = false;
+        //mainButtons[ViewState.Stats].isCheck = false;
+        //mainButtons[ViewState.Upgrade].isCheck = false;
+        //mainButtons[ViewState.Boss].isCheck = false;
+        //mainButtons[ViewState.Ingame].myButton.image.sprite = checkImages[0];
+        //mainButtons[ViewState.Stats].myButton.image.sprite = checkImages[0];
+        //mainButtons[ViewState.Upgrade].myButton.image.sprite = checkImages[0];
+        //mainButtons[ViewState.Boss].myButton.image.sprite = checkImages[0];
 
-        StartCoroutine(SmoothMove(curCamPos, 1f));
+        //mainButtons[oldView].isCheck = false;
+        //mainButtons[curView].isCheck = true;
+        //mainButtons[oldView].myButton.image.sprite = checkImages[0];
+        //mainButtons[curView].myButton.image.sprite = checkImages[1];
+
+        //StartCoroutine(SmoothMove(curCamPos, 0.5f));
     }
 
     public void ChanageView(ViewState view, float cPos)
     {
+        SoundManager.instance.StopSFX();
+
         oldView = curView;
         curView = view;
         curCamPos = cPos;
@@ -104,11 +117,12 @@ public class SwipeManager : MonoBehaviour, IDragHandler, IEndDragHandler
         mainButtons[oldView].myButton.image.sprite = checkImages[0];
         mainButtons[curView].myButton.image.sprite = checkImages[1];
 
-        StartCoroutine(SmoothMove(curCamPos, 1f));
+        StartCoroutine(SmoothMove(curCamPos, 0.5f));
     }
 
     public IEnumerator SmoothMove(float aPos = 0f, float seconds = 1f)
     {
+        GameLogic.instance.Save();
         isMove = true;
         float t = 0f;
 
@@ -123,57 +137,109 @@ public class SwipeManager : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnStats()
     {
+        if (isMove)
+            return;
+
         oldView = curView;
         curView = ViewState.Stats;
         curCamPos = 5.6F;
 
+        mainButtons[ViewState.Ingame].isCheck = false;
+        mainButtons[ViewState.Stats].isCheck = false;
+        mainButtons[ViewState.Upgrade].isCheck = false;
+        mainButtons[ViewState.Boss].isCheck = false;
+        mainButtons[ViewState.Ingame].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Stats].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Upgrade].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Boss].myButton.image.sprite = checkImages[0];
+
         mainButtons[oldView].isCheck = false;
         mainButtons[curView].isCheck = true;
         mainButtons[oldView].myButton.image.sprite = checkImages[0];
         mainButtons[curView].myButton.image.sprite = checkImages[1];
 
-        StartCoroutine(SmoothMove(curCamPos, 1f));
+        StartCoroutine(SmoothMove(curCamPos, 0.5f));
     }
 
     public void OnUpgrade()
     {
+        if (isMove)
+            return;
+
         oldView = curView;
         curView = ViewState.Upgrade;
         curCamPos = 11.2F;
 
+        mainButtons[ViewState.Ingame].isCheck = false;
+        mainButtons[ViewState.Stats].isCheck = false;
+        mainButtons[ViewState.Upgrade].isCheck = false;
+        mainButtons[ViewState.Boss].isCheck = false;
+        mainButtons[ViewState.Ingame].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Stats].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Upgrade].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Boss].myButton.image.sprite = checkImages[0];
+
         mainButtons[oldView].isCheck = false;
         mainButtons[curView].isCheck = true;
         mainButtons[oldView].myButton.image.sprite = checkImages[0];
         mainButtons[curView].myButton.image.sprite = checkImages[1];
 
-        StartCoroutine(SmoothMove(curCamPos, 1f));
+        StartCoroutine(SmoothMove(curCamPos, 0.5f));
     }
 
     public void OnGame()
     {
+        if (isMove)
+            return;
+
+        Ingame.instance.ShowBackGround();
+
         oldView = curView;
         curView = ViewState.Ingame;
         curCamPos = -0F;
 
+        mainButtons[ViewState.Ingame].isCheck = false;
+        mainButtons[ViewState.Stats].isCheck = false;
+        mainButtons[ViewState.Upgrade].isCheck = false;
+        mainButtons[ViewState.Boss].isCheck = false;
+        mainButtons[ViewState.Ingame].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Stats].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Upgrade].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Boss].myButton.image.sprite = checkImages[0];
+
         mainButtons[oldView].isCheck = false;
         mainButtons[curView].isCheck = true;
         mainButtons[oldView].myButton.image.sprite = checkImages[0];
         mainButtons[curView].myButton.image.sprite = checkImages[1];
 
-        StartCoroutine(SmoothMove(curCamPos, 1f));
+        StartCoroutine(SmoothMove(curCamPos, 0.5f));
     }
 
     public void OnBoss()
     {
+        if (isMove)
+            return;
+
+        Boss.instance.ResetBossView();
+
         oldView = curView;
         curView = ViewState.Boss;
         curCamPos = 16.8F;
+
+        mainButtons[ViewState.Ingame].isCheck = false;
+        mainButtons[ViewState.Stats].isCheck = false;
+        mainButtons[ViewState.Upgrade].isCheck = false;
+        mainButtons[ViewState.Boss].isCheck = false;
+        mainButtons[ViewState.Ingame].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Stats].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Upgrade].myButton.image.sprite = checkImages[0];
+        mainButtons[ViewState.Boss].myButton.image.sprite = checkImages[0];
 
         mainButtons[oldView].isCheck = false;
         mainButtons[curView].isCheck = true;
         mainButtons[oldView].myButton.image.sprite = checkImages[0];
         mainButtons[curView].myButton.image.sprite = checkImages[1];
 
-        StartCoroutine(SmoothMove(curCamPos, 1f));
+        StartCoroutine(SmoothMove(curCamPos, 0.5f));
     }
 }

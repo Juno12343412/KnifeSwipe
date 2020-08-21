@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Scripts/Manager/Data.meta
 guid: e132c7aa7d63fdb4e9bbfae4cf65bc2e
+=======
+guid: 3f653da2d603c5d4d8ee076d0f21b223
+>>>>>>> KJY:Assets/Resources/Images/Boss/공장 보스.meta
+=======
+guid: e132c7aa7d63fdb4e9bbfae4cf65bc2e
+>>>>>>> KJY
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

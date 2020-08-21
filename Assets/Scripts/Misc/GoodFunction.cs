@@ -55,11 +55,7 @@ namespace Good
     {
         public static float GetAttack(float x)
         {
-            return 0.0961f * Mathf.Pow(x, 5f) - 
-                4.8002f * Mathf.Pow(x, 4f) + 
-                89.463f * Mathf.Pow(x, 3f) - 
-                723.38f * Mathf.Pow(x, 2f) + 
-                2394.6f * x - 2123.7f;
+            return ((((0.0961f * Mathf.Pow(x, 5f)) - (4.8002f * Mathf.Pow(x, 4f))) + (89.463f * Mathf.Pow(x, 3f))) - (723.38f * Mathf.Pow(x, 2f))) + (2394.6f * x) - 2123.7f;
         }
 
         public static float GetCoin(float x)
@@ -84,16 +80,16 @@ namespace Good
             return x + 2f;
         }
 
-        public static Text Calculation(Text text, int num)
+        public static Text Calculation(Text text, float num)
         {
-            if (num < 1000)
-                text.text = num.ToString();
-            if (num > 1000)
-                text.text = (num / 1000).ToString() + ".A";
-            if (num > 1000000)
-                text.text = (num / 1000000).ToString() + ".B";
-            if (num > 1000000000)
-                text.text = (num / 1000000000).ToString() + ".C";
+            if (num < 1000f)
+                text.text = Mathf.Round(num).ToString();
+            if (num > 1000f)
+                text.text = Mathf.Round(num / 1000f).ToString() + ".A";
+            if (num > 1000000f)
+                text.text = Mathf.Round(num / 1000000f).ToString() + ".B";
+            if (num > 1000000000f)
+                text.text = Mathf.Round(num / 1000000000f).ToString() + ".C";
 
             return text;
         }

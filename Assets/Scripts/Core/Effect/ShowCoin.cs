@@ -10,7 +10,18 @@ public class ShowCoin : MonoBehaviour
     [SerializeField] private Text MySpecialCoin;
     void Update()
     {
-        MyCoin = ETC.Calculation(MyCoin, PlayerStats.instance.stats.playerCoin);
-        MySpecialCoin = ETC.Calculation(MySpecialCoin, PlayerStats.instance.stats.playerSpecialCoin);
+        if (PlayerStats.instance.stats.playerCoin >= 0)
+        {
+            MyCoin = ETC.Calculation(MyCoin, PlayerStats.instance.stats.playerCoin);
+        }
+        else if (PlayerStats.instance.stats.playerCoin < 0)
+            MyCoin.text = "0";
+
+        if (PlayerStats.instance.stats.playerSpecialCoin >= 0)
+        {
+            MySpecialCoin = ETC.Calculation(MySpecialCoin, PlayerStats.instance.stats.playerSpecialCoin);
+        }
+        else if (PlayerStats.instance.stats.playerSpecialCoin < 0)
+            MySpecialCoin.text = "0";
     }
 }

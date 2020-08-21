@@ -4,7 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
 public class DataController : MonoBehaviour {
+=======
+public class DataController : MonoBehaviour{
+>>>>>>> KJY
     static GameObject _container;
     static GameObject Container {
         get {

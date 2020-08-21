@@ -8,6 +8,10 @@ TagManager:
   - Knife
   - Wall
   - UI
+  - Explosion
+  - BlackHole
+  - MekaGear
+  - SwordOra
   layers:
   - Default
   - TransparentFX

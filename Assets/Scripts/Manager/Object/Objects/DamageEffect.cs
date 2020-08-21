@@ -7,7 +7,7 @@ using Good;
 
 public class DamageEffect : PoolingObject
 {
-    [HideInInspector] public int getDamage = 0;
+    [HideInInspector] public float getDamage = 0;
     [HideInInspector] public bool isCrit = false;
     public override string objectName => "Effect";
     public Text damageText;
